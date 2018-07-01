@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component
 class StringToBookIdConverter : Converter<String, BookId>{
     override fun convert(source: String): BookId? {
         //TODO implement ここでnullを返すとエラーになって500がかえってしまうので、いい感じにする必要がある
-        val id =source.toLongOrNull()
-        return if(id != null) BookId(id) else null
+        return source.toLongOrNull()?.let { BookId(it) }
     }
-
 }

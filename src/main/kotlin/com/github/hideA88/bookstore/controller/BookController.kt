@@ -6,7 +6,7 @@ import com.github.hideA88.bookstore.model.service.BookStoreService
 import org.springframework.web.bind.annotation.*
 
 
-//TODO flyway, react, service層の処理 transaction
+//TODO react, transaction
 
 @RestController
 @RequestMapping(value = "api/book")
@@ -25,7 +25,7 @@ class BookController(
     @RequestMapping("/findBy")
     fun findBy(
         @RequestParam("id") bookId: BookId
-    ): Book {
+    ): Book? {
         return bookService.findBy(bookId)
     }
 

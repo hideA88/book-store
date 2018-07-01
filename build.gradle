@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.50a'
+        kotlinVersion = '1.2.50'
         springBootVersion = '2.0.4.BUILD-SNAPSHOT'
     }
     repositories {
@@ -40,6 +40,7 @@ repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
+    maven { url  "https://dl.bintray.com/kotlin/exposed" }
 }
 
 
@@ -47,11 +48,17 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-devtools")
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect")
-    compile("org.springframework.boot:spring-boot-devtools")
+    //for db
+    compile('mysql:mysql-connector-java:8.0.11')
+    compile('org.jetbrains.exposed:spring-transaction:0.10.3')
+    runtime('org.jetbrains.exposed:exposed:0.10.3')
+    //for json
     compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
+    //for swagger
     compile("io.springfox:springfox-swagger2:2.6.0")
     compile("io.springfox:springfox-swagger-ui:2.6.0")
     testCompile('org.springframework.boot:spring-boot-starter-test')

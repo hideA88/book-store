@@ -1,25 +1,26 @@
 package com.github.hideA88.bookstore.model.service
 
 import com.github.hideA88.bookstore.model.domain.entity.*
+import com.github.hideA88.bookstore.model.domain.repository.BookRepository
 import com.github.hideA88.bookstore.model.domain.vo.*
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @Service
-class BookStoreService {
+class BookStoreService(
+    private val bookRepository: BookRepository
+) {
     fun list(bookName: BookName?, authorName: AuthorName?, publisherName: PublisherName?): List<Book> {
-        //TODO implement
-        return listOf(getMockBook())
+        return bookRepository.list(bookName, authorName, publisherName)
     }
 
-    fun findBy(bookId: BookId): Book {
-        //TODO
-        return getMockBook(bookId)
+    fun findBy(bookId: BookId): Book? {
+        return bookRepository.findBy(bookId)
     }
 
-    fun create(name: BookName, id: AuthorId, id2: PublisherId): Book {
-        //TODO implement controller用のbookとかつくらないといけなさそう
-        //
-        return TODO()
+    fun create(bookName: BookName, authorId: AuthorId, publisherId: PublisherId): Book {
+        return bookRepository.save(bookName, authorId, publisherId)
     }
 
     fun update(): Book {

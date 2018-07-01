@@ -1,4 +1,4 @@
-package com.github.hideA88.bookstore
+package com.github.hideA88.bookstore.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
