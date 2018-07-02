@@ -2,7 +2,7 @@ package com.github.hideA88.bookstore.model.domain.repository.table
 
 import org.jetbrains.exposed.sql.Table
 
-object BookDataView: Table() {
+object BookDataView: Table("bookdata") {
     val id            = long("id")
     val name          = varchar("name", 255)
     val authorId      = long("author_id")

@@ -13,10 +13,10 @@ class DBConfig(private val env: Environment) {
     @Bean
     fun dataSource(): DataSource {
         var source = DriverManagerDataSource()
-        source.setDriverClassName(env.get("spring.datasource.driverClassName"))
-        source.url = env.get("spring.datasource.url")
-        source.username = env.get("spring.datasource.username")
-        source.password = env.get("spring.datasource.password")
+        source.setDriverClassName(env["spring.datasource.driverClassName"])
+        source.url      = env["spring.datasource.url"]
+        source.username = env["spring.datasource.username"]
+        source.password = env["spring.datasource.password"]
         return source
     }
 }

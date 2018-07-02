@@ -1,7 +1,7 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/bookstore
+    url: jdbc:mysql://127.0.0.1:3306/bookstore?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: bookstore
     password: password
     driverClassName: com.mysql.cj.jdbc.Driver

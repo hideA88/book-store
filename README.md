@@ -9,10 +9,12 @@ docker-compose up -d
 
 ### db setup
 ```
-docker-compose up flyway_clean
+cd docker
+docker-compose up flywayClean
 ```
 ```
-docker-compose up flyway_migrate
+cd docker
+docker-compose up flywayMigrate
 ```
 
 ### run application

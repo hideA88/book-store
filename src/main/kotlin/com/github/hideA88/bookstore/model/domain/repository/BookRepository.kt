@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository
 class BookRepository {
     fun list(bookName: BookName?, authorName: AuthorName?, publisherName: PublisherName?): List<Book> {
         //TODO implement where句のくみたての実装
-        return BookDataView.selectAll().map { createBook(it) }
+        return BookDataView.selectAll().orderBy(BookDataView.id).map { createBook(it) }
     }
 
     fun findBy(bookId: BookId): Book? {
