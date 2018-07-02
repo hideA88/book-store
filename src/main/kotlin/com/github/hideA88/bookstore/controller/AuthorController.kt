@@ -29,7 +29,8 @@ class AuthorController(
     fun create(
         @RequestBody req: AuthorRequest
     ): Author {
-        return authorService.create(req.name)
+        val autorName = AuthorName(req.name)
+        return authorService.create(autorName)
     }
 
     @PostMapping("/update")
@@ -46,6 +47,6 @@ class AuthorController(
     }
 
     companion object {
-        data class AuthorRequest(val name: AuthorName)
+        data class AuthorRequest(val name: String)
     }
 }

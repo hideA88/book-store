@@ -21,16 +21,20 @@ class AuthorRepository {
     }
 
     fun save(authorName: AuthorName): Author {
-        val st = Authors.insert {
+        Authors.insert {
             it[name] = authorName.value
         }
-        val (id, name) = Pair(st[Authors.id], st[Authors.name])
-        if(id != null && name != null){
-            return Author(AuthorId(id), AuthorName(name))
-        } else {
-            //TODO 例外処理
-            throw Exception()
-        }
+        //TODO FIXME generatedKeyがnullでかえってくる。。。
+        //println(st[Authors.name])
+        return list(authorName).last()
+
+//        val (id, name) = Pair(st[Authors.id], st[Authors.name])
+//        if(id != null && name != null){
+//            return Author(AuthorId(id), AuthorName(name))
+//        } else {
+//            //TODO 例外処理
+//            throw Exception()
+//        }
     }
 
     //TODO 成功か失敗かをどのように扱うべきなのか
