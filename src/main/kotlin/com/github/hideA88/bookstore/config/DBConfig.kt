@@ -9,7 +9,7 @@ import javax.sql.DataSource
 
 @Configuration
 class DBConfig(private val env: Environment) {
-    //TODO connection poolの設定も必要そう？
+    //TODO connection poolの設定も必要そう? hikari connectionをつかう実装にしたほうがよさそう
     @Bean
     fun dataSource(): DataSource {
         var source = DriverManagerDataSource()
