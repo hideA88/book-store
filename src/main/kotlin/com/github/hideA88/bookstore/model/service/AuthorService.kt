@@ -28,4 +28,8 @@ class AuthorService(
         return authorRepository.update(author)
     }
 
+    fun delete(authorId: AuthorId) {
+        return authorRepository.delete(authorId)
+    }
+
 }

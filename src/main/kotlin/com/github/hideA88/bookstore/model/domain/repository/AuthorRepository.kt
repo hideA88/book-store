@@ -21,20 +21,10 @@ class AuthorRepository {
     }
 
     fun save(authorName: AuthorName): Author {
-        Authors.insert {
+        val id = Authors.insertAndGetId {
             it[name] = authorName.value
         }
-        //TODO FIXME generatedKeyがnullでかえってくる。。。
-        //println(st[Authors.name])
-        return list(authorName).last()
-
-//        val (id, name) = Pair(st[Authors.id], st[Authors.name])
-//        if(id != null && name != null){
-//            return Author(AuthorId(id), AuthorName(name))
-//        } else {
-//            //TODO 例外処理
-//            throw Exception()
-//        }
+        return Author(AuthorId(id.value), authorName)
     }
 
     //TODO 成功か失敗かをどのように扱うべきなのか
@@ -44,13 +34,12 @@ class AuthorRepository {
         }
     }
 
-    fun delete(author: Author): Unit {
-         Authors.deleteWhere{Authors.id eq author.id.value}
+    fun delete(authorId: AuthorId): Unit {
+         Authors.deleteWhere{Authors.id eq authorId.value}
     }
 
-
     private fun getAuthor(row: ResultRow): Author {
-        return Author(AuthorId(row[Authors.id]), AuthorName(row[Authors.name]))
+        return Author(AuthorId(row[Authors.id].value), AuthorName(row[Authors.name]))
     }
 
 

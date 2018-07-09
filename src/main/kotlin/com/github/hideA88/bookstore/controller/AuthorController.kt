@@ -27,26 +27,32 @@ class AuthorController(
 
     @PostMapping("/create")
     fun create(
-        @RequestBody req: AuthorRequest
+        @RequestBody req: CreateRequest
     ): Author {
         val autorName = AuthorName(req.name)
         return authorService.create(autorName)
     }
 
+    //FIXME まとめて編集できるようにする？
     @PostMapping("/update")
     fun update(
+        @RequestBody req: UpdateRequest
     ): Unit {
-        return TODO("implement")
+        val author = Author(AuthorId(req.id), AuthorName(req.name))
+        return authorService.update(author)
     }
 
     @DeleteMapping("/delete")
     fun delete(
+        @RequestBody req: DeleteRequest
     ): Unit {
-        //TODO delete時に返却するのはstatus 200だけでいい気がする。だとするとdeleteメソッドでよい？
-        return TODO("implement")
+        val authorId = AuthorId(req.id)
+        authorService.delete(authorId)
     }
 
     companion object {
-        data class AuthorRequest(val name: String)
+        data class CreateRequest(val name: String)
+        data class UpdateRequest(val id: Long, val name: String)
+        data class DeleteRequest(val id: Long)
     }
 }

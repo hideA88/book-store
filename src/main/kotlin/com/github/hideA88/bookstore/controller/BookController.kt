@@ -6,8 +6,7 @@ import com.github.hideA88.bookstore.model.service.BookStoreService
 import org.springframework.web.bind.annotation.*
 
 
-//TODO react, transaction
-
+//TODO error handler
 @RestController
 @RequestMapping(value = "api/book")
 class BookController(

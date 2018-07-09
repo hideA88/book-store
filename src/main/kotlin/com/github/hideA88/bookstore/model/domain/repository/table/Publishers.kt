@@ -1,8 +1,7 @@
 package com.github.hideA88.bookstore.model.domain.repository.table
 
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.dao.LongIdTable
 
-object Publishers : Table("publisher") {
-    val id   = long("id").primaryKey()
+object Publishers : LongIdTable("publisher") {
     val name = varchar("name", 255)
 }
