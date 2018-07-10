@@ -4,7 +4,7 @@ import com.github.hideA88.bookstore.model.domain.vo.*
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 
-object StringConverterUtil {
+object NameConverterUtil {
     @Component
     class StringToBookNameConverter : Converter<String, BookName> {
         override fun convert(source: String): BookName {
@@ -15,7 +15,6 @@ object StringConverterUtil {
     @Component
     class StringToAuthorNameConverter : Converter<String, AuthorName> {
         override fun convert(source: String): AuthorName {
-            println("hogehogehgoe")
             return AuthorName(source)
         }
     }

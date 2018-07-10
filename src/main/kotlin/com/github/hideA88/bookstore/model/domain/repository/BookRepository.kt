@@ -12,19 +12,30 @@ import org.springframework.stereotype.Repository
 class BookRepository {
     fun list(bookName: BookName?, authorName: AuthorName?, publisherName: PublisherName?): List<Book> {
         //TODO implement where句のくみたての実装
-        return BookDataView.selectAll().orderBy(BookDataView.id).map { createBook(it) }
+        return BookDataView.selectAll().orderBy(BookDataView.id).map { getBook(it) }
     }
 
     fun findBy(bookId: BookId): Book? {
         return BookDataView.select{BookDataView.id.eq(bookId.value)}
-            .firstOrNull()?.let { createBook(it) }
+            .firstOrNull()?.let { getBook(it) }
     }
 
     fun save(bookName: BookName, authorId: AuthorId, publisherId: PublisherId): Book {
         TODO()
     }
 
-    private fun createBook(row: ResultRow): Book {
+
+    fun update(modifyBook: Book): Book {
+        return TODO()
+    }
+
+
+    fun delete(bookId: BookId) {
+        TODO()
+    }
+
+
+    private fun getBook(row: ResultRow): Book {
         val author    = Author(AuthorId(row[BookDataView.authorId]), AuthorName(row[BookDataView.authorName]))
         val publisher = Publisher(PublisherId(row[BookDataView.publisherId]), PublisherName(row[BookDataView.publisherName]))
         return Book(BookId(row[BookDataView.id]),
@@ -32,5 +43,6 @@ class BookRepository {
             author, publisher
         )
     }
+
 
 }

@@ -23,12 +23,12 @@ class BookStoreService(
         return bookRepository.save(bookName, authorId, publisherId)
     }
 
-    fun update(): Book {
-        return TODO()
+    fun update(modifyBook: Book): Book {
+        return bookRepository.update(modifyBook)
     }
 
-    fun delete(): Unit {
-        TODO()
+    fun delete(bookId: BookId): Unit {
+        return bookRepository.delete(bookId)
     }
 
     private fun getMockBook(bookId: BookId = BookId(1)): Book {
