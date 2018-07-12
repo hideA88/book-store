@@ -4,14 +4,17 @@ import com.github.hideA88.bookstore.model.domain.entity.Author
 import com.github.hideA88.bookstore.model.domain.repository.table.Authors
 import com.github.hideA88.bookstore.model.domain.vo.AuthorId
 import com.github.hideA88.bookstore.model.domain.vo.AuthorName
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.like
 import org.jetbrains.exposed.sql.*
 import org.springframework.stereotype.Repository
 
 @Repository
 class AuthorRepository {
     fun list(authorName: AuthorName?): List<Author> {
-        //TODO implement where句
-        return Authors.selectAll().orderBy(Authors.id).map{getAuthor(it)}
+        println(authorName)
+        val whereQuery  = authorName?.let{Authors.name like "%${authorName.value}%"}
+        val selectQuery = (whereQuery?.let{Authors.select(whereQuery)} ?: Authors.selectAll())
+        return selectQuery.orderBy(Authors.id).map{getAuthor(it)}
     }
 
     fun findBy(authorId: AuthorId): Author? {

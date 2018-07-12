@@ -4,6 +4,7 @@ import com.github.hideA88.bookstore.model.domain.entity.Publisher
 import com.github.hideA88.bookstore.model.domain.repository.table.Publishers
 import com.github.hideA88.bookstore.model.domain.vo.PublisherId
 import com.github.hideA88.bookstore.model.domain.vo.PublisherName
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.like
 import org.jetbrains.exposed.sql.*
 import org.springframework.stereotype.Repository
 
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Repository
 @Repository
 class PublisherRepository {
     fun list(publisherName: PublisherName?): List<Publisher> {
-        //TODO implement where句
-        return Publishers.selectAll().orderBy(Publishers.id).map{getPublisher(it)}
+        val whereQuery  = publisherName?.let{Publishers.name like "%${publisherName.value}%"}
+        val selectQuery = (whereQuery?.let{Publishers.select(whereQuery)} ?: Publishers.selectAll())
+        return selectQuery.orderBy(Publishers.id).map{getPublisher(it)}
     }
 
     fun findBy(publisherId: PublisherId): Publisher? {

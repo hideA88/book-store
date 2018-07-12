@@ -29,8 +29,8 @@ class AuthorController(
     fun create(
         @RequestBody req: CreateRequest
     ): Author {
-        val autorName = AuthorName(req.name)
-        return authorService.create(autorName)
+        val authorName = AuthorName(req.name)
+        return authorService.create(authorName)
     }
 
     //FIXME まとめて編集できるようにする？

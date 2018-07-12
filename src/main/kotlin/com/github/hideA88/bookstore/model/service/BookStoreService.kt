@@ -11,29 +11,23 @@ import org.springframework.transaction.annotation.Transactional
 class BookStoreService(
     private val bookRepository: BookRepository
 ) {
-    fun list(bookName: BookName?, authorName: AuthorName?, publisherName: PublisherName?): List<Book> {
+    fun list(bookName: BookName?, authorName: AuthorName?, publisherName: PublisherName?): List<BookData> {
         return bookRepository.list(bookName, authorName, publisherName)
     }
 
-    fun findBy(bookId: BookId): Book? {
+    fun findBy(bookId: BookId): BookData? {
         return bookRepository.findBy(bookId)
     }
 
-    fun create(bookName: BookName, authorId: AuthorId, publisherId: PublisherId): Book {
+    fun create(bookName: BookName, authorId: AuthorId, publisherId: PublisherId): BookData {
         return bookRepository.save(bookName, authorId, publisherId)
     }
 
-    fun update(modifyBook: Book): Book {
+    fun update(modifyBook: Book): Unit {
         return bookRepository.update(modifyBook)
     }
 
     fun delete(bookId: BookId): Unit {
         return bookRepository.delete(bookId)
-    }
-
-    private fun getMockBook(bookId: BookId = BookId(1)): Book {
-        return Book(bookId, BookName("hoge"),
-            Author(AuthorId(1), AuthorName("fuga")),
-            Publisher(PublisherId(1), PublisherName("piyo")))
     }
 }
